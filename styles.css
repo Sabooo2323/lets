@@ -1,0 +1,349 @@
+/* ============================================================
+   QAZAQ DÜNIESI  ·  "Celestial Steppe" design system
+   Display  : ZeroCool (brand, big Kazakh words)
+   Headings : Baloo 2  (friendly English UI)
+   Body/KK  : Nunito   (reliable Kazakh Cyrillic)
+   ============================================================ */
+
+@font-face{
+  font-family:"ZeroCool";
+  src:url("../assets/font/ZeroCool.otf") format("opentype");
+  font-display:swap;
+}
+
+:root{
+  /* Celestial Steppe palette */
+  --sky:#16B6D8;          /* Kök — the eternal blue sky      */
+  --sky-deep:#0E8FB0;
+  --gold:#FFC23D;         /* steppe sun / flag gold          */
+  --gold-deep:#F2A516;
+  --clay:#E2664A;         /* terracotta felt ornament        */
+  --cream:#FBF3E2;        /* warm yurt canvas (app bg)       */
+  --cream-2:#F4E7CE;
+  --ink:#1C2230;          /* text & sticker outline          */
+  --ink-soft:#5A6377;
+  --night:#0E1320;        /* hero / celebration night sky    */
+  --night-2:#1A2138;
+  --white:#FFFFFF;
+  --line:#EADBBE;
+
+  /* Holographic signature (echoes the logo) */
+  --holo:linear-gradient(115deg,#79E0FF 0%,#9CB8FF 30%,#FF93D6 65%,#C49BFF 100%);
+  --holo-soft:linear-gradient(115deg,#bff1ff 0%,#ffd7f1 60%,#e4d3ff 100%);
+
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --shadow:0 18px 40px -22px rgba(28,34,48,.45);
+  --shadow-sm:0 8px 22px -14px rgba(28,34,48,.4);
+  --app-w:480px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Nunito",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 50% -10%, #1d2746 0%, #0e1320 55%) fixed;
+  min-height:100dvh;
+  display:flex;justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+/* faint ornament wash behind the app frame on wide screens */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(40% 30% at 12% 20%, rgba(121,224,255,.14), transparent 70%),
+    radial-gradient(40% 30% at 88% 78%, rgba(255,147,214,.12), transparent 70%);
+}
+
+/* ---- the phone-style app column ---- */
+#app{
+  position:relative;z-index:1;
+  width:100%;max-width:var(--app-w);
+  min-height:100dvh;
+  background:var(--cream);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 0 80px -10px rgba(0,0,0,.6);
+}
+@media(min-width:520px){
+  #app{min-height:min(880px,96dvh);margin:auto;border-radius:34px;
+       outline:8px solid #05080f;}
+}
+
+/* screens fill the column; only one is active */
+.screen{display:none;flex:1;flex-direction:column;animation:fade .45s ease}
+.screen.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.pad{padding:22px 22px 30px}
+.scroll{overflow-y:auto;flex:1}
+.scroll::-webkit-scrollbar{width:0}
+
+/* ---- typography helpers ---- */
+.brand{font-family:"ZeroCool",sans-serif;letter-spacing:.5px;line-height:.95}
+.head{font-family:"Baloo 2",cursive;font-weight:700;line-height:1.05}
+.kk{font-family:"Nunito";font-weight:800}
+.eyebrow{font-family:"ZeroCool",sans-serif;font-size:.74rem;letter-spacing:2px;
+  text-transform:uppercase;color:var(--sky-deep)}
+.muted{color:var(--ink-soft)}
+
+/* ===========================================================
+   HERO  /  landing
+   =========================================================== */
+#hero{background:radial-gradient(130% 90% at 50% 8%,#1c2748 0%,#0c1120 60%);color:#fff;
+  justify-content:space-between;text-align:center;position:relative;overflow:hidden}
+#hero .stars{position:absolute;inset:0;pointer-events:none;background-image:
+  radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),
+  radial-gradient(1.5px 1.5px at 80% 22%,#cfe9ff,transparent),
+  radial-gradient(1px 1px at 65% 60%,#fff,transparent),
+  radial-gradient(1.5px 1.5px at 35% 75%,#ffd9f3,transparent),
+  radial-gradient(1px 1px at 12% 65%,#fff,transparent);
+  opacity:.7;animation:twinkle 4s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.35}}
+.hero-logo{width:200px;max-width:62%;margin:6px auto 0;display:block;mix-blend-mode:screen;
+  filter:drop-shadow(0 0 30px rgba(124,212,255,.55));
+  animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+#hero h1{font-family:"ZeroCool",sans-serif;font-size:clamp(2.4rem,11vw,3.4rem);
+  background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:1px;margin-top:2px}
+#hero .tag{color:#bcd0ee;max-width:30ch;margin:10px auto 0;font-weight:600}
+#hero .sub-kk{font-family:"Nunito";font-weight:800;color:var(--gold);margin-top:18px;font-size:1.05rem}
+
+/* ===========================================================
+   buttons
+   =========================================================== */
+.btn{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.05rem;
+  border:none;border-radius:999px;padding:15px 26px;cursor:pointer;
+  width:100%;color:#fff;transition:transform .12s ease, box-shadow .2s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn-holo{background:var(--holo);color:#16213d;
+  box-shadow:0 14px 30px -12px rgba(124,212,255,.7)}
+.btn-gold{background:linear-gradient(180deg,var(--gold),var(--gold-deep));color:#3a2a00;
+  box-shadow:0 12px 26px -14px rgba(242,165,22,.9)}
+.btn-sky{background:linear-gradient(180deg,var(--sky),var(--sky-deep));
+  box-shadow:0 12px 26px -14px rgba(14,143,176,.9)}
+.btn-ghost{background:#fff;color:var(--ink);border:2px solid var(--line);
+  box-shadow:var(--shadow-sm)}
+.btn-sm{width:auto;padding:11px 20px;font-size:.95rem}
+
+/* ===========================================================
+   CHAT onboarding (WhatsApp style)
+   =========================================================== */
+#chat{background:linear-gradient(180deg,#f3ead6,#fbf3e2)}
+.chat-top{display:flex;align-items:center;gap:12px;padding:14px 18px;
+  background:linear-gradient(180deg,#10243a,#143a4d);color:#fff;
+  box-shadow:0 6px 18px -10px rgba(0,0,0,.5);z-index:2}
+.chat-top img{width:46px;height:46px;border-radius:50%;border:2px solid #6fe0ff;object-fit:cover}
+.chat-top .who{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.05rem}
+.chat-top .stat{font-size:.74rem;color:#8fe3b0;display:flex;align-items:center;gap:5px}
+.chat-top .stat::before{content:"";width:7px;height:7px;border-radius:50%;background:#46d98a}
+.chat-log{flex:1;overflow-y:auto;padding:18px 16px 8px;display:flex;flex-direction:column;gap:10px}
+.chat-log::-webkit-scrollbar{width:0}
+.bubble{max-width:82%;padding:11px 15px;border-radius:18px;font-weight:600;line-height:1.4;
+  animation:pop .3s ease;box-shadow:var(--shadow-sm);font-size:.98rem}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.bubble.sulu{background:#fff;border-bottom-left-radius:5px;align-self:flex-start}
+.bubble.me{background:linear-gradient(180deg,#d8f6ff,#bfeeff);border-bottom-right-radius:5px;align-self:flex-end}
+.bubble .kk{color:var(--sky-deep)}
+.typing{align-self:flex-start;background:#fff;border-radius:18px;border-bottom-left-radius:5px;
+  padding:14px 16px;display:flex;gap:5px;box-shadow:var(--shadow-sm)}
+.typing span{width:8px;height:8px;border-radius:50%;background:#b9c2d2;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.chat-input{padding:12px 14px 18px;background:#fbf3e2;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:10px}
+.chat-input .row{display:flex;gap:8px}
+.field{flex:1;border:2px solid var(--line);border-radius:999px;padding:13px 18px;
+  font-family:"Nunito";font-weight:700;font-size:1rem;background:#fff;color:var(--ink)}
+.field:focus{outline:none;border-color:var(--sky)}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:"Baloo 2",cursive;font-weight:600;border:2px solid var(--sky);
+  background:#fff;color:var(--sky-deep);border-radius:999px;padding:10px 16px;cursor:pointer;
+  transition:.12s;flex:1;min-width:120px}
+.chip:hover{background:var(--sky);color:#fff}
+.chip:active{transform:scale(.96)}
+
+/* ===========================================================
+   HOME  / module map
+   =========================================================== */
+.home-head{padding:20px 22px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.home-head .meId{display:flex;align-items:center;gap:12px}
+.home-head img{width:52px;height:52px;border-radius:50%;border:3px solid var(--gold);object-fit:cover}
+.home-head .rank{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.12rem;line-height:1}
+.home-head .rankSub{font-size:.78rem;color:var(--ink-soft);font-weight:700}
+.spark{font-family:"ZeroCool";background:#fff;border-radius:999px;padding:8px 14px;
+  box-shadow:var(--shadow-sm);font-size:.85rem;color:var(--gold-deep);white-space:nowrap}
+
+.banner{margin:8px 22px 4px;border-radius:var(--r-lg);overflow:hidden;position:relative;
+  background:radial-gradient(120% 130% at 80% 0%,#1d2748,#0e1320);color:#fff;padding:22px 20px;
+  box-shadow:var(--shadow)}
+.banner .stars{position:absolute;inset:0;opacity:.5;pointer-events:none;background-image:
+  radial-gradient(1.4px 1.4px at 30% 30%,#fff,transparent),
+  radial-gradient(1.4px 1.4px at 75% 55%,#ffd9f3,transparent),
+  radial-gradient(1px 1px at 55% 80%,#cfe9ff,transparent)}
+.banner h2{font-family:"ZeroCool";font-size:1.5rem;position:relative;
+  background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.banner p{position:relative;color:#c2d3ee;font-weight:600;margin-top:4px;max-width:26ch}
+.banner img.guard{position:absolute;right:-6px;bottom:-10px;width:120px;opacity:.95;mix-blend-mode:screen;
+  filter:drop-shadow(0 0 16px rgba(124,212,255,.5))}
+
+.progressWrap{margin:14px 22px 2px}
+.progressWrap .lab{display:flex;justify-content:space-between;font-weight:800;font-size:.8rem;
+  color:var(--ink-soft);margin-bottom:6px}
+.bar{height:12px;border-radius:999px;background:#eadcbf;overflow:hidden}
+.bar > i{display:block;height:100%;border-radius:999px;background:var(--holo);width:0;
+  transition:width .6s cubic-bezier(.3,1,.4,1)}
+
+.path{padding:14px 22px 26px;display:flex;flex-direction:column;gap:14px}
+.node{display:flex;align-items:center;gap:14px;background:#fff;border-radius:var(--r-md);
+  padding:16px;box-shadow:var(--shadow-sm);cursor:pointer;border:2px solid transparent;
+  transition:transform .12s, border-color .2s;position:relative}
+.node:hover{transform:translateY(-2px)}
+.node:active{transform:scale(.99)}
+.node.locked{opacity:.55;cursor:not-allowed}
+.node.done{border-color:#bfe6b4}
+.node .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;
+  font-size:1.6rem;background:var(--cream-2);flex:none}
+.node.m0 .ic{background:var(--holo-soft)}
+.node .meta .t{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.08rem;line-height:1.1}
+.node .meta .s{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+.node .meta .kk{font-family:"ZeroCool";color:var(--sky-deep);font-size:.92rem;letter-spacing:.5px}
+.node .end{margin-left:auto;font-size:1.3rem}
+.node.locked .end::after{content:"🔒"}
+.node.done .end::after{content:"✓";color:#46b86a;font-weight:900}
+.node:not(.locked):not(.done) .end::after{content:"›";font-size:2rem;color:var(--sky);line-height:1}
+
+/* ===========================================================
+   LESSON  — flashcards
+   =========================================================== */
+.lesson-top{display:flex;align-items:center;gap:14px;padding:16px 18px 10px}
+.iconbtn{width:42px;height:42px;border-radius:50%;border:2px solid var(--line);background:#fff;
+  font-size:1.3rem;cursor:pointer;flex:none;display:grid;place-items:center;color:var(--ink)}
+.iconbtn:active{transform:scale(.92)}
+.lesson-top .title{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.05rem;flex:1}
+.miniProg{height:9px;border-radius:999px;background:#eadcbf;margin:0 18px;overflow:hidden}
+.miniProg > i{display:block;height:100%;background:var(--holo);width:0;transition:width .4s}
+
+.cardStage{flex:1;display:flex;align-items:center;justify-content:center;padding:14px 22px;perspective:1400px}
+.flip{width:100%;max-width:340px;aspect-ratio:5/6;cursor:pointer;
+  transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,1.2,.4,1);position:relative}
+.flip.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r-lg);
+  padding:26px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.face.front{background:linear-gradient(165deg,#ffffff,#fdf6e8);
+  border:2px solid var(--line);align-items:center;justify-content:center;text-align:center;gap:14px}
+.face.front .kk{font-family:"Nunito";font-weight:900;font-size:clamp(1.7rem,7vw,2.3rem);
+  color:var(--ink);line-height:1.15}
+.face.front .lat{font-family:"ZeroCool";color:var(--sky-deep);font-size:1.05rem;letter-spacing:.5px}
+.face.front .pron{color:var(--ink-soft);font-weight:700;font-size:.95rem}
+.face.front .hint{position:absolute;bottom:16px;font-size:.78rem;color:#b3a583;font-weight:700}
+.face.front .speak{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+  border:none;background:var(--cream-2);font-size:1.1rem;cursor:pointer}
+.face.back{background:radial-gradient(120% 120% at 80% 0%,#1d2748,#0e1320);color:#fff;
+  transform:rotateY(180deg);justify-content:center;gap:12px;text-align:center}
+.face.back .en{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.7rem;
+  background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.face.back .row2{font-weight:700;color:#bcd0ee}
+.face.back .note{margin-top:8px;background:rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;
+  font-weight:600;font-size:.9rem;color:#e8eefb;line-height:1.4}
+.face.back .note b{color:var(--gold)}
+
+.cardNav{display:flex;gap:10px;padding:6px 22px 24px}
+.cardNav .btn{flex:1}
+
+/* ===========================================================
+   QUIZ
+   =========================================================== */
+.qStage{flex:1;display:flex;flex-direction:column;padding:8px 22px 22px;gap:14px}
+.qPrompt{background:#fff;border-radius:var(--r-md);padding:22px;text-align:center;box-shadow:var(--shadow-sm);
+  border:2px solid var(--line)}
+.qPrompt .ask{font-size:.85rem;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px}
+.qPrompt .big{font-family:"Nunito";font-weight:900;font-size:clamp(1.5rem,6.5vw,2rem);margin-top:8px;line-height:1.2}
+.qPrompt .big.en{font-family:"Baloo 2",cursive;color:var(--clay)}
+.qOpts{display:flex;flex-direction:column;gap:11px}
+.opt{font-family:"Nunito";font-weight:800;font-size:1.05rem;text-align:left;
+  background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 18px;cursor:pointer;
+  transition:.14s;box-shadow:var(--shadow-sm)}
+.opt:hover{border-color:var(--sky);transform:translateY(-1px)}
+.opt:active{transform:scale(.99)}
+.opt.right{background:#e7f8e9;border-color:#5fc878;color:#1f7a3a}
+.opt.wrong{background:#fde9e6;border-color:#e2664a;color:#b33a22}
+.opt:disabled{cursor:default}
+.qCount{font-weight:800;color:var(--ink-soft);font-size:.85rem;text-align:center}
+
+/* feedback overlay (gif + wisdom mirror) */
+.fb{position:absolute;inset:0;z-index:30;display:none;flex-direction:column;
+  align-items:center;justify-content:flex-end;background:rgba(14,19,32,.5);backdrop-filter:blur(3px)}
+.fb.show{display:flex;animation:fade .25s ease}
+.fb .sheet{width:100%;background:var(--cream);border-radius:26px 26px 0 0;padding:20px 22px 26px;
+  box-shadow:0 -20px 50px -20px rgba(0,0,0,.5);animation:slideUp .35s cubic-bezier(.2,1,.3,1);text-align:center}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+.fb .gif{width:200px;max-width:64%;margin:0 auto 6px;display:block;border-radius:16px}
+.fb h3{font-family:"ZeroCool";font-size:1.6rem;letter-spacing:1px}
+.fb h3.ok{color:var(--gold-deep)} .fb h3.no{color:var(--clay)}
+.fb .correct{font-weight:800;margin-top:4px}
+.fb .correct b{color:var(--sky-deep)}
+/* wisdom mirror scroll */
+.mirror{margin:14px 0 4px;background:linear-gradient(180deg,#fff7e6,#f7e8c8);
+  border:2px solid #e7cf95;border-radius:16px;padding:14px 16px;position:relative}
+.mirror::before{content:"📜";position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  font-size:1.5rem;background:var(--cream);padding:0 6px}
+.mirror .pv{font-family:"Nunito";font-weight:900;color:#8a6d2a;line-height:1.4}
+.mirror .pvEn{font-weight:600;color:#6b5a33;font-size:.88rem;margin-top:6px;font-style:italic}
+
+/* ===========================================================
+   CELEBRATION  / suyunshi
+   =========================================================== */
+#celebrate{background:radial-gradient(130% 90% at 50% 0%,#202c52 0%,#0c1120 60%);color:#fff;
+  align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+#celebrate .stars{position:absolute;inset:0;opacity:.7;pointer-events:none;background-image:
+  radial-gradient(1.6px 1.6px at 20% 25%,#fff,transparent),
+  radial-gradient(1.6px 1.6px at 78% 30%,#ffd9f3,transparent),
+  radial-gradient(1.2px 1.2px at 60% 65%,#cfe9ff,transparent),
+  radial-gradient(1.4px 1.4px at 33% 78%,#fff,transparent)}
+.suyunshi{font-family:"ZeroCool";font-size:clamp(2.6rem,13vw,4rem);letter-spacing:2px;
+  background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:pop .5s ease, glow 2.2s ease-in-out infinite alternate;position:relative}
+@keyframes glow{to{filter:drop-shadow(0 0 26px rgba(255,147,214,.6))}}
+#celebrate .gif{width:230px;max-width:70%;border-radius:18px;margin:8px 0;position:relative}
+.upgrade{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(124,212,255,.3);
+  border-radius:18px;padding:16px 20px;margin:6px 0;backdrop-filter:blur(4px)}
+.upgrade .lab{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:#9fb6da;font-weight:800}
+.upgrade .new{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.45rem;margin-top:4px;
+  background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.player{position:relative;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);
+  border-radius:999px;padding:8px 8px 8px 16px;margin:10px 0;max-width:320px;width:100%}
+.player .pp{width:46px;height:46px;border-radius:50%;border:none;background:var(--holo);color:#16213d;
+  font-size:1.2rem;cursor:pointer;flex:none}
+.player .info{text-align:left;flex:1;overflow:hidden}
+.player .info .nm{font-weight:800;font-size:.85rem;white-space:nowrap}
+.player .info .ar{font-size:.72rem;color:#9fb6da}
+.player .wave{display:flex;gap:3px;align-items:flex-end;height:22px}
+.player .wave i{width:3px;background:#7fd4ff;border-radius:2px;height:6px}
+.player.playing .wave i{animation:eq .8s ease-in-out infinite alternate}
+.player .wave i:nth-child(2){animation-delay:.1s}.player .wave i:nth-child(3){animation-delay:.2s}
+.player .wave i:nth-child(4){animation-delay:.3s}.player .wave i:nth-child(5){animation-delay:.15s}
+@keyframes eq{to{height:22px}}
+.tip{position:relative;font-weight:600;color:#cdd9ee;max-width:32ch;font-size:.92rem;margin:6px auto 0;line-height:1.45}
+#celebrate .actions{position:relative;z-index:6;display:flex;flex-direction:column;gap:10px;width:100%;max-width:320px;margin-top:14px}
+
+/* confetti */
+.confetti{position:absolute;pointer-events:none;top:-12px;width:9px;height:14px;opacity:.9;z-index:5;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:1}}
+
+/* toast */
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(30px);
+  background:var(--ink);color:#fff;font-weight:700;padding:12px 20px;border-radius:999px;
+  box-shadow:var(--shadow);opacity:0;transition:.3s;z-index:99;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* small footer credit on hero */
+.credit{position:relative;font-size:.72rem;color:#6b7ba0;font-weight:600;margin-top:14px}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}

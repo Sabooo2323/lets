@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qazaq Dünиesi — learn Kazakh with Sulu</title>
+<meta name="description" content="An interactive, culture-first way to learn beginner Kazakh, guided by the mascot Sulu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/img/logo.jpg">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="screen active pad">
+    <div class="stars"></div>
+    <div style="margin-top:auto">
+      <img class="hero-logo" src="assets/img/logo.jpg" alt="Qazaq Dünиesi guardian bird logo">
+      <h1>QAZAQ<br>DÜNIESI</h1>
+      <p class="tag">Step into the Kazakh world. Learn the language of the eternal blue sky — one warm phrase at a time.</p>
+      <p class="sub-kk">Сәлеметсіз бе! 👋</p>
+    </div>
+    <div style="margin-top:auto;width:100%">
+      <button class="btn btn-holo" id="startBtn">Begin your journey →</button>
+      <p class="credit">Guided by Sulu · 6 modules · built for true beginners</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAT ONBOARDING ============ -->
+  <section id="chat" class="screen">
+    <div class="chat-top">
+      <img src="assets/img/sulu_avatar.png" alt="Sulu">
+      <div>
+        <div class="who">Сұлу · Sulu</div>
+        <div class="stat">online · your guide</div>
+      </div>
+    </div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="chat-input" id="chatInput"></div>
+  </section>
+
+  <!-- ============ HOME / MAP ============ -->
+  <section id="home" class="screen">
+    <div class="scroll">
+      <div class="home-head">
+        <div class="meId">
+          <img src="assets/img/sulu_avatar.png" alt="profile">
+          <div>
+            <div class="rank" id="homeRank">—</div>
+            <div class="rankSub" id="homeRankSub">your title</div>
+          </div>
+        </div>
+        <div class="spark" id="homeSpark">★ 0%</div>
+      </div>
+
+      <div class="banner">
+        <div class="stars"></div>
+        <h2>Qazaq Dünиesi</h2>
+        <p id="bannerMsg">Your path across the steppe begins now.</p>
+        <img class="guard" src="assets/img/logo.jpg" alt="">
+      </div>
+
+      <div class="progressWrap">
+        <div class="lab"><span>Journey progress</span><span id="progPct">0%</span></div>
+        <div class="bar"><i id="progFill"></i></div>
+      </div>
+
+      <div class="path" id="path"></div>
+    </div>
+  </section>
+
+  <!-- ============ LESSON (flashcards + quiz live here) ============ -->
+  <section id="lesson" class="screen">
+    <div class="lesson-top">
+      <button class="iconbtn" id="lessonBack" aria-label="Back to map">←</button>
+      <div class="title" id="lessonTitle">Module</div>
+    </div>
+    <div class="miniProg"><i id="miniFill"></i></div>
+    <div id="lessonBody" style="flex:1;display:flex;flex-direction:column"></div>
+    <!-- quiz feedback overlay -->
+    <div class="fb" id="feedback">
+      <div class="sheet" id="fbSheet"></div>
+    </div>
+  </section>
+
+  <!-- ============ CELEBRATION ============ -->
+  <section id="celebrate" class="screen pad">
+    <div class="stars"></div>
+    <div class="suyunshi">SÚIINŞI!</div>
+    <img class="gif" id="celebGif" src="" alt="celebration">
+    <div class="upgrade">
+      <div class="lab">New title unlocked</div>
+      <div class="new" id="celebTitle">—</div>
+    </div>
+    <div class="player" id="player">
+      <button class="pp" id="playBtn" aria-label="Play music">▶</button>
+      <div class="info">
+        <div class="nm">Hafiz · dombyra melody</div>
+        <div class="ar">Asylbek Ensepov</div>
+      </div>
+      <div class="wave"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <p class="tip" id="celebTip"></p>
+    <div class="actions">
+      <button class="btn btn-gold" id="shareBtn">📣 Súiinşi! Share my news</button>
+      <button class="btn btn-holo" id="celebNext">Continue the journey →</button>
+    </div>
+    <audio id="celebAudio" src="assets/celebration.mp3" loop preload="auto"></audio>
+  </section>
+
+</div>
+<div id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
